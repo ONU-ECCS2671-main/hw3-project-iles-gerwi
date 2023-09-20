@@ -1,7 +1,7 @@
 # hw3-doublyLinkedList
 Contains the skeleton code for the HW 3 assignment on implementing a doubly linked list.
 
-# Disclaimers:
+### Disclaimers:
 This is a pairwise group assignment (please speak to us if considering working alone). 
 
 In order to complete this assignment, be sure to accept the GitHub Classroom assignment, clone the repo, and produce a local copy of the cloned repo on your computer. 
@@ -14,7 +14,7 @@ The breakdown of your individual grade will be 90% for your individual member fu
 
 This homework is only submitted through GitHub by pushing the commits your team make. The deadline is Friday, September 29.
 
-# Assignment Motivation
+### Assignment Motivation
 
 Linked lists are a linear data structure that can be used for many applications, including as an implementation for other data structures (as we will see). One direct application is music playlists. Linked lists make good containers for managing such playlists because they are:
 
@@ -32,19 +32,19 @@ The playlist should be set up so that the head of the list has song number 1, th
 
 The following member functions should be implemented by Student 1:
 
-1.	SongNode* getSongNode(const string song);
-2.	void addSong(const string addedSongName);
-3.	void addSong(const string addedSongName, const int songOrder);
-4.	void deleteSong(const string deletedSongName);
-5.	int getSongNum(const string searchedSongName);
+1.	`SongNode* getSongNode(const string song);`
+2.	`void addSong(const string addedSongName);`
+3.	`void addSong(const string addedSongName, const int songOrder);`
+4.	`void deleteSong(const string deletedSongName);`
+5.	`int getSongNum(const string searchedSongName);`
 
 The following member functions should be implemented by Student 2:
 
-1.	SongNode* getSongNode(const int songNumber);
-2.	void addSong(const string addedSongName, const int songOrder, const string artistName);
-3.	void deleteLastSong();
-4.	void deleteSong(const int songNumInList);
-5.	string getSongName(const int songNumInList);
+1.	`SongNode* getSongNode(const int songNumber);`
+2.	`void addSong(const string addedSongName, const int songOrder, const string artistName);`
+3.	`void deleteLastSong();`
+4.	`void deleteSong(const int songNumInList);`
+5.	`string getSongName(const int songNumInList);`
 
 There are several features fully implemented for you that do not require any modification, including the class body, main (although you may choose to comment out some of the commands in main to debug member functions as you implement them), the constructor, destructor, a simple getter function to return the number of songs in the playlist, and a friend function of our class that overloads the insertion operator to print out the contents in the music playlist object. This example of operator overloading in C++ uses the concept of a friend function, which can access private (and protected) members of a class even though it is not a member function of the class. It is needed so the output stream objects play nicely with our linked list class objects. Operator overloading is not part of this course and you will not be tested on this topic; it is just for your information. Feel free to add examples to the main to test your code more comprehensively.  
 
@@ -54,47 +54,49 @@ It is highly recommended each student tests their member functions as they go, u
 
 For Student 1, a brief description of what each member function should do is given below:
 
-1.	SongNode* getSongNode(const string song);
+1.	`SongNode* getSongNode(const string song);`
 
 Traverses the linked list looking for the given song name (string) and returns a node pointer to the first node with a given song name if present, or nullptr otherwise. It’s a private helper function.
 
-2.	void addSong(const string addedSongName);
+2.	`void addSong(const string addedSongName);`
 
 Should add a new song node with the given string as the song name, at the head of the play list. All other song numbers should be incremented since this added song is the top of the play list (number 1). Also be sure to update the number of songs in the list. Since no artist is given, let it be an empty string.
-3.	void addSong(const string addedSongName, const int songOrder);
-Should add a new song node with the given string as the song name, at the point in the playlist given by the int songOrder (if songOrder is valid given the list, between 1 and the number of songs). All songs at songOrder and beyond (because the new song will supplant the place of the old song at songOrder) should have their song numbers incremented and all pointers should be handled correctly. Note that if songOrder < 2, the song should be placed at the head, or if songOrder > numSongs, it should be placed at the tail. Since no artist is given, let it be an empty string. Be sure that your code can handle all special cases (empty list, single node list, placing at head, placing at tail, etc.).
 
-4.	void deleteSong(const string deletedSongName);
+3.	`void addSong(const string addedSongName, const int songOrder);`
+4.	
+Should add a new song node with the given string as the song name, at the point in the playlist given by the `int` `songOrder` (if `songOrder` is valid given the list, between 1 and the number of songs). All songs at `songOrder` and beyond (because the new song will supplant the place of the old song at `songOrder`) should have their song numbers incremented and all pointers should be handled correctly. Note that if `songOrder < 2`, the song should be placed at the head, or if `songOrder > numSongs`, it should be placed at the tail. Since no artist is given, let it be an empty string. Be sure that your code can handle all special cases (empty list, single node list, placing at head, placing at tail, etc.).
 
-Deletes a SongNode based on the song name, if present. If the song isn’t in the playlist, there is nothing to delete. Be sure to handle all special cases (empty list, deleting the only node in a single node list, deleting at the head, deleting at the tail, deleting in the middle, etc.). Be sure to handle the pointers around the node to be deleted correctly (no memory leaks or dangling pointers), and be sure to decrement the appropriate song numbers after deleting the node.
+5.	`void deleteSong(const string deletedSongName);`
 
-5.	int getSongNum(const string searchedSongName);
+Deletes a `SongNode` based on the song name, if present. If the song isn’t in the playlist, there is nothing to delete. Be sure to handle all special cases (empty list, deleting the only node in a single node list, deleting at the head, deleting at the tail, deleting in the middle, etc.). Be sure to handle the pointers around the node to be deleted correctly (no memory leaks or dangling pointers), and be sure to decrement the appropriate song numbers after deleting the node.
 
-Searches for the song in the playlist with searchedSongName and returns its song number if it is found. If there is no song with the searched song name, then the function returns -1 (must return an int).
+5.	`int getSongNum(const string searchedSongName);`
+
+Searches for the song in the playlist with `searchedSongName` and returns its song number if it is found. If there is no song with the searched song name, then the function returns -1 (must return an `int`).
  
 # Student 2 Member Function Descriptions
 
 For Student 2, a brief description of what each member function should do is given below:
 
-1. SongNode* getSongNode(const int songNumber);
+1. `SongNode* getSongNode(const int songNumber);`
 
-Traverses the linked list looking for the node with the given song number (int). For dealing with all ints, it returns head if songNumber < 2, tail if songNumber ≥  numSongs, or the first node pointer to a node whose song number is at least the value of songNumber. It’s a private helper function.
+Traverses the linked list looking for the node with the given song number (`int`). For dealing with all ints, it returns `head` if `songNumber < 2`, `tail` if `songNumber ≥ numSongs`, or the first node pointer to a node whose song number is at least the value of `songNumber`. It’s a private helper function.
 
-2. void addSong(const string addedSongName, const int songOrder, const string artistName);
+2. `void addSong(const string addedSongName, const int songOrder, const string artistName);`
 
-Should add a new song node with the given string as the song name, at the point in the playlist given by the int songOrder (if songOrder is valid given the list, between 1 and the number of songs), and the artist artistName. All songs at songOrder and beyond (because the new song will supplant the place of the old song at songOrder) should have their song numbers incremented and all pointers should be handled correctly. Note that if songOrder < 2, the song should be placed at the head, or if songOrder > numSongs, it should be placed at the tail. Since no artist is given, let it be an empty string. Be sure that your code can handle all special cases (empty list, single node list, placing at head, placing at tail, etc.).
+Should add a new song node with the given string as the song name, at the point in the playlist given by the int `songOrder` (if `songOrder` is valid given the list, between 1 and the number of songs), and the artist `artistName`. All songs at `songOrder` and beyond (because the new song will supplant the place of the old song at `songOrder`) should have their song numbers incremented and all pointers should be handled correctly. Note that if `songOrder < 2`, the song should be placed at the head, or if `songOrder > numSongs`, it should be placed at the tail. Since no artist is given, let it be an empty string. Be sure that your code can handle all special cases (empty list, single node list, placing at head, placing at tail, etc.).
 
-3. void deleteLastSong();
+3. `void deleteLastSong();`
 
 Should delete the last song in the playlist (at the tail). 
 
-4. void deleteSong (const int songNumInList);
+4. `void deleteSong (const int songNumInList);`
 
-Deletes a SongNode based on its position in the list (given by songNumInList). It should delete the first song if songNumInList < 2 or the last node if songNumInList ≥  numSongs. Be sure to handle the pointers around the node to be deleted correctly (no memory leaks or dangling pointers), and be sure to decrement the appropriate song numbers after deleting the node.
+Deletes a `SongNode` based on its position in the list (given by `songNumInList`). It should delete the first song if `songNumInList < 2` or the last node if `songNumInList ≥ numSongs`. Be sure to handle the pointers around the node to be deleted correctly (no memory leaks or dangling pointers), and be sure to decrement the appropriate song numbers after deleting the node.
 
-5. int getSongName(const int songNumInList);
+5. `int getSongName(const int songNumInList);`
 
-Searches for the song in the playlist with the song number given by songNumInList. It should return the head if songNumInList < 2, and the tail if songNumInList ≥ numSongs. For the special case of an empty list, return the string “Empty Play List” (must return a string).
+Searches for the song in the playlist with the song number given by `songNumInList`. It should return the head if `songNumInList < 2`, and the tail if `songNumInList ≥ numSongs`. For the special case of an empty list, return the string “Empty Play List” (must return a string).
 
 
 
