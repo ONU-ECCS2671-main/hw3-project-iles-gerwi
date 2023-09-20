@@ -1,4 +1,5 @@
-# hw3-doublyLinkedList
+# Homework 3
+## Doubly Linked Lists
 Contains the skeleton code for the HW 3 assignment on implementing a doubly linked list.
 
 ### Disclaimers:
@@ -26,7 +27,7 @@ Linked lists are a linear data structure that can be used for many applications,
 
 Most playlist user interfaces have the next song and previous song buttons to make it easy to traverse the list in either direction, which matches well the linking members in a doubly linked list. One drawback of linked lists is the inability for random access (as you will see in your implementation), like indexing in arrays. If you want to go to the 5th song in the playlist, you have to traverse the linked list to the 5th song.
 
-# Assignment Overview
+### Assignment Overview
 
 The playlist should be set up so that the head of the list has song number 1, the second node has song number 2, and so on until the tail has the last song number of numSongs (the total number of songs in the playlist). This attribute of the playlist must be carefully maintained as songs are added or deleted.
 
@@ -50,7 +51,7 @@ There are several features fully implemented for you that do not require any mod
 
 It is highly recommended each student tests their member functions as they go, using cout statements to view the state of certain variables as needed. Comment out necessary statements in main while debugging.
 
-# Student 1 Member Function Descriptions
+### Student 1 Member Function Descriptions
 
 For Student 1, a brief description of what each member function should do is given below:
 
@@ -74,7 +75,7 @@ Deletes a `SongNode` based on the song name, if present. If the song isn’t in 
 
 Searches for the song in the playlist with `searchedSongName` and returns its song number if it is found. If there is no song with the searched song name, then the function returns -1 (must return an `int`).
  
-# Student 2 Member Function Descriptions
+### Student 2 Member Function Descriptions
 
 For Student 2, a brief description of what each member function should do is given below:
 
