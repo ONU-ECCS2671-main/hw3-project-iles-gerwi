@@ -1,8 +1,8 @@
 /*
 Course: ECCS 2671 -- Data Structures and Algorithms 1
 Group Members
-Student 1 = _____________
-Student 2 = _____________
+Student 1 = Zach Iles
+Student 2 = Mitchell Gerwin
 
 Use this code template to submit HW 3.
 
