@@ -1,4 +1,4 @@
-# Homework 3
+# Project-1
 ## Doubly Linked Lists
 Contains the skeleton code for the HW 3 assignment on implementing a doubly linked list.
 
