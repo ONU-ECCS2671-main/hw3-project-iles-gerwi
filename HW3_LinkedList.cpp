@@ -36,7 +36,17 @@ private:
 	SongNode* head; // points to first song node in the play list
 	SongNode* tail; // points to last song node in the play list
 
-	SongNode* getSongNode(const string song); // returns a pointer to the first node with a given song name if present, or nullptr otherwise
+	// returns a pointer to the first node with a given song name if present, or nullptr otherwise
+	SongNode* getSongNode(const string song){
+        SongNode* current = head;
+        while(current != nullptr){
+            if(current->songName == song){
+                return current;
+            }
+            current = current -> next;
+		}
+        return nullptr; // Backup for if a song is not found
+    }
 	SongNode* getSongNode(const int songNumber); // overloaded to search by song number in the list. Returns head if < 2 and tail if >= numSongs or first node pointer whose Songnum >= songNumber
 
 public:
