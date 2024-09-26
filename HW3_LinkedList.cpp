@@ -74,17 +74,58 @@ public:
 
 		numSongs++; // updates number of songs in the playlist
 	} 
-	
+
 	 // overload to insert the new song node at songOrder if songorder > 1; at head if < 2, or at tail if > numSongs
 	 // moves the nodes at songOrder to have an incremented value in the order of the list
 	void addSong(const string addedSongName, const int songOrder){
+		
+		//inserts at head
+		if(songOrder<2){
+			addSong(addedSongName); // uses the other function
+		}
+		//inserts at tail
+		else if(songOrder>numSongs){
+			SongNode* newNode = new SongNode(addedSongName, numSongs+1, "", nullptr, tail);
+			if(tail!= nullptr){
+				tail->next = newNode;
+			}
+			tail = newNode; // updates tail to newNode
+			if(head== nullptr){
+				head = newNode; // sets head to newNode if list was empty
+			}
+		}
+		//inserts at songOrder
+		else{
+			SongNode* current = head; 
 
+			//moves the node to the correct position for insertion
+			for(int i; i < songOrder -1 && current != nullptr; i++){
+				current = current->next;
+			}
+			SongNode* newNode = new SongNode(addedSongName, songOrder, "", current -> next, current);
+			if(current->next != nullptr){
+				current-> next-> prev = newNode; // links the next node back to newNode
+			}
+			current-> next = newNode; // links current node to newNode
+
+			// increases song number for rest of list
+			current = newNode->next;
+			while(current!= nullptr){
+				current ->songNum++;
+				current = current->next;
+			}
+		}
+
+		//updates number of songs
+		numSongs++;
 	}
 
 	 // overload to all adding a song also with the artist name
 	void addSong(const string addedSongName, const int songOrder, const string artistName); 
 
-	void deleteSong(const string deletedSongName); // deletes a SongNode based on the song name if present
+ 	// deletes a SongNode based on the song name if present
+	void deleteSong(const string deletedSongName);
+
 	 // overload to also delete a song in the given position in the play list. Delete first if < 2 or delete last if >= numSongs
 	void deleteSong(const int songNumInList);
 
@@ -190,6 +231,8 @@ int main()
 	cout << "The play list has " << list1.getNumSongs() << " songs, including: " << list1 << endl;
 */
 list1.addSong("Gel"); // Student 1 member function
-list1.addSong("Test"); // Student 1 member function
+list1.addSong("Shine", 3); // Student 1 member function
+list1.addSong("Beatin' the Odds", 2); // Student 1 member function
+list1.addSong("Can't Touch This", 72); // Student 1 member function
 cout << "The play list has " << list1.getNumSongs() << " songs, including: " << list1 << endl;
 }
