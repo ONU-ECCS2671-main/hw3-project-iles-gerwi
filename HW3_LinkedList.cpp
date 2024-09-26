@@ -53,10 +53,34 @@ public:
 	MusicPlayList() {numSongs = 0; head=tail=nullptr;} // default constructor
 	~MusicPlayList(); // destructor 
 
-	void addSong(const string addedSongName); // inserts a SongNode with just the song name at head 
+	// inserts a SongNode with just the song name at head 
+	void addSong(const string addedSongName){
+		SongNode* newNode = new SongNode(addedSongName, 1, "", head, nullptr);
+		if(head != nullptr){
+			head->prev = newNode; // links the head to the newNode
+		}
+		head = newNode; // sets the head equal to the newNode
+
+		if(tail == nullptr){
+			tail = newNode; // sets tail to newNode if list was empty
+		}
+		
+		// incriments the song numbers by 1
+		SongNode* current = head->next;
+		while(current != nullptr){
+			current -> songNum++;
+			current = current->next;
+		}
+
+		numSongs++; // updates number of songs in the playlist
+	} 
+	
 	 // overload to insert the new song node at songOrder if songorder > 1; at head if < 2, or at tail if > numSongs
 	 // moves the nodes at songOrder to have an incremented value in the order of the list
-	void addSong(const string addedSongName, const int songOrder); 
+	void addSong(const string addedSongName, const int songOrder){
+
+	}
+
 	 // overload to all adding a song also with the artist name
 	void addSong(const string addedSongName, const int songOrder, const string artistName); 
 
@@ -130,7 +154,10 @@ ostream& operator<<(ostream& outputStream, const MusicPlayList& playList)
 
 int main()
 {
+
 	MusicPlayList list1;
+	/*
+	
 	cout << "We start with: " << list1.getSongName(1) << endl; // Student 2 member function
 	list1.addSong("Billie Jean", 3, "Michael Jackson"); // Student 2 member function
 	list1.addSong("Ready for It", -1, "Taylor Swift"); // Student 2 member function
@@ -161,5 +188,8 @@ int main()
 	list1.addSong("Back in Black", 10); // Student 1 member function
 	list1.deleteSong(2); // Student 2 member function
 	cout << "The play list has " << list1.getNumSongs() << " songs, including: " << list1 << endl;
-
+*/
+list1.addSong("Gel"); // Student 1 member function
+list1.addSong("Test"); // Student 1 member function
+cout << "The play list has " << list1.getNumSongs() << " songs, including: " << list1 << endl;
 }
