@@ -124,7 +124,40 @@ public:
 	void addSong(const string addedSongName, const int songOrder, const string artistName); 
 
  	// deletes a SongNode based on the song name if present
-	void deleteSong(const string deletedSongName);
+	void deleteSong(const string deletedSongName){
+		SongNode* toDelete = getSongNode(deletedSongName);
+
+		if(toDelete == nullptr){
+			return; // song was not found, so nothing to delete
+		}
+
+		// update the pointers
+		if(toDelete->prev != nullptr){
+			toDelete->prev->next = toDelete->next; // links previous node to next node
+		}
+		else{
+			head = toDelete->next; // updates head if necessary
+		}
+
+		if(toDelete->next != nullptr){
+			toDelete->next->prev = toDelete->prev; // links next node to previous node
+		}
+		else{
+			tail = toDelete->prev; // updates tail if necessary
+		}
+
+		// subtract 1 from remaining song numbers
+		SongNode* current = toDelete->next;
+		while(current!=nullptr){
+			current->songNum--;
+			current = current->next;
+		}
+
+		delete toDelete; // free memory allocated for the pointers
+
+		// update number of songs
+		numSongs--;
+	}
 
 	 // overload to also delete a song in the given position in the play list. Delete first if < 2 or delete last if >= numSongs
 	void deleteSong(const int songNumInList);
@@ -230,9 +263,12 @@ int main()
 	list1.deleteSong(2); // Student 2 member function
 	cout << "The play list has " << list1.getNumSongs() << " songs, including: " << list1 << endl;
 */
+list1.addSong("Billie Jean", 3); // Student 2 member function
 list1.addSong("Gel"); // Student 1 member function
 list1.addSong("Shine", 3); // Student 1 member function
 list1.addSong("Beatin' the Odds", 2); // Student 1 member function
 list1.addSong("Can't Touch This", 72); // Student 1 member function
+cout << "The play list has " << list1.getNumSongs() << " songs, including: " << list1 << endl;
+list1.deleteSong("Shine"); // Student 1 member function
 cout << "The play list has " << list1.getNumSongs() << " songs, including: " << list1 << endl;
 }
