@@ -2,7 +2,7 @@
 Course: ECCS 2671 -- Data Structures and Algorithms 1
 Group Members
 Student 1 = Zach Iles
-Student 2 = Mitchel Gerwin
+Student 2 = Mitchell Gerwin
 
 Use this code template to submit HW 3.
 
@@ -239,7 +239,6 @@ int main()
 {
 
 	MusicPlayList list1;
-	/*
 	
 	cout << "We start with: " << list1.getSongName(1) << endl; // Student 2 member function
 	list1.addSong("Billie Jean", 3, "Michael Jackson"); // Student 2 member function
@@ -271,17 +270,5 @@ int main()
 	list1.addSong("Back in Black", 10); // Student 1 member function
 	list1.deleteSong(2); // Student 2 member function
 	cout << "The play list has " << list1.getNumSongs() << " songs, including: " << list1 << endl;
-*/
-list1.addSong("Billie Jean", 3); // Student 2 member function
-list1.addSong("Gel"); // Student 1 member function
-list1.addSong("Shine", 3); // Student 1 member function
-list1.addSong("Beatin' the Odds", 2); // Student 1 member function
-list1.addSong("Can't Touch This", 72); // Student 1 member function
-cout << "The song number for Billie Jean is " << list1.getSongNum("Billie Jean") << endl; // Student 1 member function
-cout << "The play list has " << list1.getNumSongs() << " songs, including: " << list1 << endl;
-list1.deleteSong("Shine"); // Student 1 member function
-list1.deleteSong("Can't Touch This"); // Student 1 member function
-cout << "The song number for Can't Touch This is now " << list1.getSongNum("Can't Touch This") << " since it's not in the list anymore." << endl;
-list1.addSong("Back in Black", 10); // Student 1 member function
-cout << "The play list has " << list1.getNumSongs() << " songs, including: " << list1 << endl;
+
 }
