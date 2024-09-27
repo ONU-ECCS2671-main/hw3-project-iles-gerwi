@@ -36,8 +36,41 @@ private:
 	SongNode* head; // points to first song node in the play list
 	SongNode* tail; // points to last song node in the play list
 
-	// returns a pointer to the first node with a given song name if present, or nullptr otherwise
-	SongNode* getSongNode(const string song){
+	
+	SongNode* getSongNode(const string song); // returns a pointer to the first node with a given song name if present, or nullptr otherwise
+	SongNode* getSongNode(const int songNumber); // overloaded to search by song number in the list. Returns head if < 2 and tail if >= numSongs or first node pointer whose Songnum >= songNumber
+
+public:
+	MusicPlayList() {numSongs = 0; head=tail=nullptr;} // default constructor
+	~MusicPlayList(); // destructor 
+
+	void addSong(const string addedSongName); // inserts a SongNode with just the song name at head 
+
+	// overload to insert the new song node at songOrder if songorder > 1; at head if < 2, or at tail if > numSongs
+	// moves the nodes at songOrder to have an incremented value in the order of the list
+	void addSong(const string addedSongName, const int songOrder); 
+
+	void addSong(const string addedSongName, const int songOrder, const string artistName); // overload to all adding a song also with the artist name
+
+	void deleteSong(const string deletedSongName); // deletes a SongNode based on the song name if present
+
+	void deleteSong(const int songNumInList); // overload to also delete a song in the given position in the play list. Delete first if < 2 or delete last if >= numSongs
+
+	void deleteLastSong(); // deletes the last song in the play list (at the tail)
+
+	int getSongNum(const string searchedSongName);// searches for the song in the play list and returns the number it is at in the play list or -1 if not present
+
+	string getSongName(const int songNumInList); // searches for the songNumInList and should return the name of the song; returns first if < 2 or last if >= numSongs, or "Empty Play List" if empty.
+
+	int getNumSongs(); // returns numSongs
+
+	// overload << operator to print the MusicPlayList song names in the order of the play list
+	friend ostream& operator<<(ostream& outputStream, const MusicPlayList& musicList);
+};
+
+// Student 1 Member Functions go here
+
+MusicPlayList:: SongNode* :: MusicPlayList:: getSongNode(const string song){
         SongNode* current = head;
         while(current != nullptr){
             if(current->songName == song){
@@ -47,14 +80,8 @@ private:
 		}
         return nullptr; // Backup for if a song is not found
     }
-	SongNode* getSongNode(const int songNumber); // overloaded to search by song number in the list. Returns head if < 2 and tail if >= numSongs or first node pointer whose Songnum >= songNumber
 
-public:
-	MusicPlayList() {numSongs = 0; head=tail=nullptr;} // default constructor
-	~MusicPlayList(); // destructor 
-
-	// inserts a SongNode with just the song name at head 
-	void addSong(const string addedSongName){
+void MusicPlayList:: addSong(const string addedSongName){
 		SongNode* newNode = new SongNode(addedSongName, 1, "", head, nullptr);
 		if(head != nullptr){
 			head->prev = newNode; // links the head to the newNode
@@ -75,9 +102,7 @@ public:
 		numSongs++; // updates number of songs in the playlist
 	} 
 
-	 // overload to insert the new song node at songOrder if songorder > 1; at head if < 2, or at tail if > numSongs
-	 // moves the nodes at songOrder to have an incremented value in the order of the list
-	void addSong(const string addedSongName, const int songOrder){
+void MusicPlayList:: addSong(const string addedSongName, const int songOrder){
 		
 		//inserts at head
 		if(songOrder<2){
@@ -120,69 +145,49 @@ public:
 		numSongs++;
 	}
 
-	 // overload to all adding a song also with the artist name
-	void addSong(const string addedSongName, const int songOrder, const string artistName); 
+void MusicPlayList :: deleteSong(const string deletedSongName){
+	SongNode* toDelete = getSongNode(deletedSongName);
 
- 	// deletes a SongNode based on the song name if present
-	void deleteSong(const string deletedSongName){
-		SongNode* toDelete = getSongNode(deletedSongName);
-
-		if(toDelete == nullptr){
-			return; // song was not found, so nothing to delete
-		}
-
-		// update the pointers
-		if(toDelete->prev != nullptr){
-			toDelete->prev->next = toDelete->next; // links previous node to next node
-		}
-		else{
-			head = toDelete->next; // updates head if necessary
-		}
-
-		if(toDelete->next != nullptr){
-			toDelete->next->prev = toDelete->prev; // links next node to previous node
-		}
-		else{
-			tail = toDelete->prev; // updates tail if necessary
-		}
-
-		// subtract 1 from remaining song numbers
-		SongNode* current = toDelete->next;
-		while(current!=nullptr){
-			current->songNum--;
-			current = current->next;
-		}
-
-		delete toDelete; // free memory allocated for the pointers
-
-		// update number of songs
-		numSongs--;
+	if(toDelete == nullptr){
+		return; // song was not found, so nothing to delete
 	}
 
-	 // overload to also delete a song in the given position in the play list. Delete first if < 2 or delete last if >= numSongs
-	void deleteSong(const int songNumInList);
-
-	void deleteLastSong(); // deletes the last song in the play list (at the tail)
-
-	// searches for the song in the play list and returns the number it is at in the play list or -1 if not present
-	int getSongNum(const string searchedSongName){
-		SongNode* songNode = getSongNode(searchedSongName);
-		if(songNode != nullptr){
-			return songNode->songNum; // returns the song number if it exists
-		}
-
-		return -1; // catch for if song was not found
+	// update the pointers
+	if(toDelete->prev != nullptr){
+	toDelete->prev->next = toDelete->next; // links previous node to next node
+	}
+	else{
+		head = toDelete->next; // updates head if necessary
 	}
 
-	string getSongName(const int songNumInList); // searches for the songNumInList and should return the name of the song; returns first if < 2 or last if >= numSongs, or "Empty Play List" if empty.
+	if(toDelete->next != nullptr){
+		toDelete->next->prev = toDelete->prev; // links next node to previous node
+	}
+	else{
+		tail = toDelete->prev; // updates tail if necessary
+	}
 
-	int getNumSongs(); // returns numSongs
+	// subtract 1 from remaining song numbers
+	SongNode* current = toDelete->next;
+	while(current!=nullptr){
+		current->songNum--;
+		current = current->next;
+	}
 
-	// overload << operator to print the MusicPlayList song names in the order of the play list
-	friend ostream& operator<<(ostream& outputStream, const MusicPlayList& musicList);
-};
+	delete toDelete; // free memory allocated for the pointers
 
-// Student 1 Member Functions go here
+	// update number of songs
+	numSongs--;
+}
+
+int MusicPlayList :: getSongNum(const string searchedSongName){
+	SongNode* songNode = getSongNode(searchedSongName);
+	if(songNode != nullptr){
+		return songNode->songNum; // returns the song number if it exists
+	}
+
+	return -1; // catch for if song was not found
+}
 
 // Student 2 Member functions go here
 
@@ -270,5 +275,4 @@ int main()
 	list1.addSong("Back in Black", 10); // Student 1 member function
 	list1.deleteSong(2); // Student 2 member function
 	cout << "The play list has " << list1.getNumSongs() << " songs, including: " << list1 << endl;
-
 }
